@@ -7,5 +7,5 @@ Sistema de gerenciamento de eventos, feito com o framework Laravel
 - Upload de imagens
 - Dashboard simples dos eventos
 - Filtros simples para os eventos
-- Templates simples e resposivas feitos com Bootstrap
+- Templates simples e responsivos feitos com Bootstrap
 - Mensagens

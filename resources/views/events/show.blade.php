@@ -29,7 +29,7 @@
                     <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
                     <lord-icon src="https://cdn.lordicon.com/mdgrhyca.json" trigger="loop"
                         colors="primary:#121331,secondary:#08a88a" style="width:30px;height:30px">
-                    </lord-icon> Dono do evento
+                    </lord-icon> {{$eventOwner['name']}}
                 </p>
                 <a href="#" class="btn btn-primary" id="event-submit"> Confirmar presença </a>
                 <br><br>
