@@ -45,9 +45,8 @@ class EventController extends Controller
             $event->image = $imageName;
         }
 
-        $user = auth()->user()->id;
+        $user = auth()->user();
         $event->user_id = $user->id;
-
         $event->save();
 
         return redirect('/')->with('msg', 'Evento criado com sucesso!');
@@ -57,7 +56,7 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
 
-        $eventOwner = User::where('id', $event->id)->first()->toArray();
+        $eventOwner = User::where('id', $event->user_id)->first()->toArray();
 
         return view('events.show', ['event' => $event,'eventOwner' => $eventOwner]);
     }
