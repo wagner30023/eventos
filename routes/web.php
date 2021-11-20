@@ -19,14 +19,9 @@ Route::get('/','EventController@index');
 Route::get('/events/create','EventController@create')->middleware('auth');
 Route::get('/events/{id}','EventController@show');
 Route::post('/events','EventController@store');
-
-
-
+Route::get('/dashboard','EventController@dashboard')->middleware('auth');
 
 Route::get('/contact',function(){
     return view('contact');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');

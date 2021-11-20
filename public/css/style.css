@@ -208,6 +208,19 @@ header {
 
 /*End Event page  */
 
+/* dashboard  */
+.dashboard-title-container {
+    margin-bottom: 30px;
+    margin-top:30px;
+}
+
+.dashboard-event-container {
+    width:25%;
+}
+
+
+/* End dashboard  */
+
 /* footer */
 footer{
     text-align: center;
