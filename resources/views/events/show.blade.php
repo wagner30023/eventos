@@ -23,7 +23,7 @@
                     <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
                     <lord-icon src="https://cdn.lordicon.com/imamsnbq.json" trigger="loop"
                         colors="primary:#121331,secondary:#08a88a" style="width:30px;height:30px">
-                    </lord-icon> X participantes
+                    </lord-icon> {{count($event->users)}} participantes
                 </p>
                 <p class="event-owner">
                     <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
@@ -31,7 +31,11 @@
                         colors="primary:#121331,secondary:#08a88a" style="width:30px;height:30px">
                     </lord-icon> {{$eventOwner['name']}}
                 </p>
-                <a href="#" class="btn btn-primary" id="event-submit"> Confirmar presença </a>
+                <form action="/events/join/{{$event->id}}" method="post">
+                    @csrf
+                    <a href="/events/join/{{$event->id}}" class="btn btn-primary" id="event-submit" onclick="event.preventDefault();
+                        this.closest('form').submit();"> Confirmar presença </a>
+                </form>
                 <br><br>
                 <h3> O evento conta com: </h3>
                 <ul id="items-list">
