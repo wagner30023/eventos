@@ -20,6 +20,11 @@ Route::get('/events/create','EventController@create')->middleware('auth');
 Route::get('/events/{id}','EventController@show');
 Route::post('/events','EventController@store');
 Route::get('/dashboard','EventController@dashboard')->middleware('auth');
+Route::delete('events/{id}','EventController@destroy')->middleware('auth');
+Route::get('/events/edit/{id}','EventController@edit')->middleware('auth');
+Route::put('/events/update/{id}','EventController@update')->middleware('auth');
+
+
 
 Route::get('/contact',function(){
     return view('contact');

@@ -13,12 +13,12 @@ class EventController extends Controller
         $search = request("search");
         if ($search) {
             $events = Event::where([
-                ['title','like','%'.$search.'%']
+                ['title', 'like', '%' . $search . '%']
             ])->get();
         } else {
             $events = Event::all();
         }
-        return view('welcome', ['events' => $events,'search' => $search]);
+        return view('welcome', ['events' => $events, 'search' => $search]);
     }
 
     public function create()
@@ -58,7 +58,7 @@ class EventController extends Controller
 
         $eventOwner = User::where('id', $event->user_id)->first()->toArray();
 
-        return view('events.show', ['event' => $event,'eventOwner' => $eventOwner]);
+        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
     }
 
     public function dashboard()
@@ -66,6 +66,35 @@ class EventController extends Controller
         $user = auth()->user();
         $events = $user->events;
 
-        return view('events.dashboard',['events' => $events]);
+        return view('events.dashboard', ['events' => $events]);
+    }
+
+    public function destroy($id)
+    {
+        Event::findOrFail($id)->delete();
+        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso');
+    }
+
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('events.edit', ['event' => $event]);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->all();
+
+        // imagem upload
+        if ($request->hasFile('image') && $request->file('image')) {
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($request->image->getClientOriginalName() . strtotime("now") . "." . $extension);
+            $requestImage->move(public_path('img/events'), $imageName);
+            $data['image'] = $imageName;
+        }
+
+        Event::findOrFail($request->id)->update($data);
+        return redirect('/dashboard')->with('msg', 'Evento atualizado com sucesso!');
     }
 }
